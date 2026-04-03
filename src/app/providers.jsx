@@ -8,7 +8,7 @@ import '@/lib/webElectronApi';
  * 1. Platform auth (JWT) — checked via usePlatformAuthStore
  * 2. Per-business PIN auth — existing flow for business dashboard users
  */
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef, useCallback, Suspense } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
@@ -23,7 +23,7 @@ import SocketProvider from '@/providers/SocketProvider';
 import useSocketRefresh from '@/hooks/useSocketRefresh';
 import usePlatformAuthStore from '@/stores/platformAuthStore';
 
-export default function Providers({ children }) {
+function ProvidersInner({ children }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -273,4 +273,12 @@ export default function Providers({ children }) {
 function SocketRefreshBridge() {
   useSocketRefresh();
   return null;
+}
+
+export default function Providers({ children }) {
+  return (
+    <Suspense fallback={null}>
+      <ProvidersInner>{children}</ProvidersInner>
+    </Suspense>
+  );
 }

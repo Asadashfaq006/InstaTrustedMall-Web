@@ -7,7 +7,7 @@ import useReportStore from '@/stores/reportStore';
 import DateRangePicker from '@/components/reports/DateRangePicker';
 import ExportButton from '@/components/reports/ExportButton';
 
-export default function BuyerStatementReport() {
+function BuyerStatementReportInner() {
   const router = useRouter();
   const navigate = (path) => router.push(path);
   const searchParams = useSearchParams();
@@ -219,5 +219,13 @@ export default function BuyerStatementReport() {
         </>
       )}
     </div>
+  );
+}
+
+export default function BuyerStatementReport() {
+  return (
+    <React.Suspense fallback={null}>
+      <BuyerStatementReportInner />
+    </React.Suspense>
   );
 }

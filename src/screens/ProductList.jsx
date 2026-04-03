@@ -27,7 +27,7 @@ import CellHistoryPopover from '@/components/products/CellHistoryPopover';
 import ImportWizard from '@/components/products/ImportWizard';
 import ScanModeButton from '@/components/scanner/ScanModeButton';
 
-export default function ProductList() {
+function ProductListInner() {
   const router = useRouter();
   const navigate = (path) => router.push(path);
   const searchParams = useSearchParams();
@@ -438,7 +438,13 @@ export default function ProductList() {
     </div>
   );
 }
-
+export default function ProductList() {
+  return (
+    <React.Suspense fallback={null}>
+      <ProductListInner />
+    </React.Suspense>
+  );
+}
 // ── Filter Row Component ────────────────────────────────────────────
 function FilterRow({ filter, columns, onChange, onRemove }) {
   const allFilterColumns = [

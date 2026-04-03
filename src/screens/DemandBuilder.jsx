@@ -24,7 +24,7 @@ import ScanModeButton from '@/components/scanner/ScanModeButton';
  * Full-page Demand Builder (create / edit).
  * Route: /demands/new  or  /demands/:id/edit
  */
-export default function DemandBuilder() {
+function DemandBuilderInner() {
   const router = useRouter();
   const navigate = (path) => router.push(path);
   const { id: editId } = useParams();
@@ -963,5 +963,13 @@ export default function DemandBuilder() {
         confirming={confirming}
       />
     </div>
+  );
+}
+
+export default function DemandBuilder() {
+  return (
+    <React.Suspense fallback={null}>
+      <DemandBuilderInner />
+    </React.Suspense>
   );
 }

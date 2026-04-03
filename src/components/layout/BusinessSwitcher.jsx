@@ -9,7 +9,7 @@ import { getBusinessTypeInfo } from '@/constants/businessPresets';
 import { toast } from '@/components/ui/use-toast';
 import { cn, localFileUrl } from '@/lib/utils';
 
-export default function BusinessSwitcher() {
+function BusinessSwitcherInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const urlBusinessId = searchParams.get('businessId');
@@ -183,5 +183,13 @@ export default function BusinessSwitcher() {
         )}
       </PopoverContent>
     </Popover>
+  );
+}
+
+export default function BusinessSwitcher() {
+  return (
+    <React.Suspense fallback={null}>
+      <BusinessSwitcherInner />
+    </React.Suspense>
   );
 }

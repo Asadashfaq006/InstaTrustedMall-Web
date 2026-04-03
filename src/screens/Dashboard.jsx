@@ -47,7 +47,7 @@ function formatCurrency(val, symbol = '₹') {
   return `${symbol}${num.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 }
 
-export default function Dashboard() {
+function DashboardInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const urlBusinessId = searchParams.get('businessId');
@@ -311,5 +311,13 @@ export default function Dashboard() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Dashboard() {
+  return (
+    <React.Suspense fallback={null}>
+      <DashboardInner />
+    </React.Suspense>
   );
 }
