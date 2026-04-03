@@ -1,0 +1,29 @@
+# dependencies
+node_modules/
+
+# Backend — kept in a separate repo
+backend/
+
+# Next.js
+.next/
+out/
+
+# production
+build/
+dist/
+
+# env files
+.env
+.env.local
+.env.*.local
+
+# debug
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/
+*.swp
